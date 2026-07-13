@@ -35,7 +35,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('ai_place_recommendation_results');
-        Schema::dropIfExists('ai_place_recommendations');
+        Schema::dropIfExists('ai_nearby_explores_results');
+        Schema::dropIfExists('ai_nearby_explores');
     }
 };

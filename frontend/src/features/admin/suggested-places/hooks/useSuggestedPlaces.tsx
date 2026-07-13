@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getSuggestedPlaces } from "../api/getSuggestedPlaces.api";
 import { updateSuggestionStatus } from "../api/updateSuggestionStatus.api";
+import type { UpdateSuggestionStatusData } from "../types/suggestedPlace.type";
 import toast from "react-hot-toast";
 
 export function useSuggestedPlaces() {
@@ -12,7 +13,7 @@ export function useSuggestedPlaces() {
   });
 
   const updateStatusMutation = useMutation({
-    mutationFn: ({ id, data }: { id: number; data: any }) => updateSuggestionStatus(id, data),
+    mutationFn: ({ id, data }: { id: number; data: UpdateSuggestionStatusData }) => updateSuggestionStatus(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-suggested-places"] });
       toast.success("تم تحديث حالة الاقتراح بنجاح");

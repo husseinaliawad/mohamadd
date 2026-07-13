@@ -1,0 +1,87 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+vendor/
+**/node_modules/
+**/vendor/
+
+# Local runtimes and generated binaries
+.runtime/
+**/.runtime/
+
+# Laravel
+backend/public/storage
+backend/public/hot
+backend/public/build
+backend/storage/*.key
+backend/storage/pail
+backend/storage/logs/*.log
+backend/storage/framework/cache/data/*
+backend/storage/framework/sessions/*
+backend/storage/framework/views/*
+backend/bootstrap/cache/*.php
+backend/.phpunit.cache/
+backend/.phpunit.result.cache
+backend/auth.json
+
+# Frontend builds
+frontend/dist/
+frontend/dist-ssr/
+frontend/.vite/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+ai-service/.venv/
+ai-service/venv/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors and IDEs
+.idea/
+.vscode/
+.fleet/
+.zed/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Test and coverage output
+coverage/
+.nyc_output/
+htmlcov/
+.pytest_cache/
+
+# Keep dependency lock files tracked
+!**/composer.lock
+!**/package-lock.json
+!**/pnpm-lock.yaml
+!**/yarn.lock

@@ -55,7 +55,7 @@ export default function CreateDestinationPage() {
         </div>
       )}
 
-      <div className="bg-white shadow rounded-xl p-6 border border-purple-200 max-h-[calc(100vh-200px)] overflow-y-auto">
+      <div className="bg-white shadow rounded-xl p-6 border border-purple-200">
         <DestinationForm
           onSubmit={handleSubmit}
           defaultValues={getInitialValues()}

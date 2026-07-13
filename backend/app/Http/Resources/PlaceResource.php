@@ -27,10 +27,14 @@ class PlaceResource extends JsonResource
             'reviews_count' => $this->reviews_count,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
+            'distance_km' => $this->when(isset($this->distance_km), $this->distance_km),
+            'ai_score' => $this->when(isset($this->ai_score), $this->ai_score),
+            'ml_score' => $this->when(isset($this->ml_score), $this->ml_score),
+            'reason' => $this->when(isset($this->reason), $this->reason),
             'city' => $this->whenLoaded('city'),
             'category' => $this->whenLoaded('category'),
             'images' => PlaceImageResource::collection($this->whenLoaded('images')->sortBy('order')),
-            'interests' => InterestResource::collection($this->whenLoaded('interests')),
+            'interests' => $this->whenLoaded('interests'),
             'reviews' => $this->whenLoaded('reviews'),
         ];
     }

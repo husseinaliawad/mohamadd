@@ -7,8 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getCities } from "../../cities/api/getCities.api";
 import { getCategories } from "../../categories/api/getCategories.api";
 import { getInterests } from "../../interests/api/getInterestTypes.api";
-import { useState } from "react";
-import { X } from "lucide-react";
 
 interface DestinationFormProps {
   onSubmit: (data: DestinationFormData) => void;
@@ -32,10 +30,6 @@ export default function DestinationForm({ onSubmit, defaultValues, isSubmitting 
     queryFn: getInterests,
   });
 
-  const [existingImages, setExistingImages] = useState<string[]>(defaultValues?.existing_images || []);
-  const [imagesToDelete, setImagesToDelete] = useState<number[]>([]);
-  const [newImagePreviews, setNewImagePreviews] = useState<string[]>([]);
-
   const {
     register,
     handleSubmit,
@@ -53,11 +47,11 @@ export default function DestinationForm({ onSubmit, defaultValues, isSubmitting 
       address: "",
       cost: 0,
       expected_duration_minutes: 0,
-      activity_level: undefined,
+      activity_level: "",
       is_outdoor: false,
       best_seasons: [],
       recommended_times: [],
-      opening_hours: undefined,
+      opening_hours: "",
       average_rating: 0,
       reviews_count: 0,
       latitude: 0,
@@ -99,40 +93,8 @@ export default function DestinationForm({ onSubmit, defaultValues, isSubmitting 
   const seasons = ["الربيع", "الصيف", "الخريف", "الشتاء"];
   const times = ["صباحاً", "ظهراً", "عصراً", "مساءً"];
 
-  const handleFormSubmit = (data: DestinationSchema) => {
-    const formData = {
-      ...data,
-      existing_images: existingImages,
-      images_to_delete: imagesToDelete,
-    } as DestinationFormData;
-    onSubmit(formData);
-  };
-
-  const handleRemoveExistingImage = (index: number) => {
-    setImagesToDelete([...imagesToDelete, index]);
-    setExistingImages(existingImages.filter((_, i) => i !== index));
-  };
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      const newPreviews: string[] = [];
-      Array.from(files).forEach((file) => {
-        const preview = URL.createObjectURL(file);
-        newPreviews.push(preview);
-      });
-      setNewImagePreviews([...newImagePreviews, ...newPreviews]);
-    }
-  };
-
-  const handleRemoveNewImage = (index: number) => {
-    setNewImagePreviews(newImagePreviews.filter((_, i) => i !== index));
-    // Note: File input cannot be easily manipulated, so we just remove from preview
-    // The actual file removal will be handled by re-setting the input
-  };
-
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FormField label="اسم المكان *" name="name" register={register} errors={errors} />
 
@@ -186,24 +148,13 @@ export default function DestinationForm({ onSubmit, defaultValues, isSubmitting 
             className="w-full rounded-lg border border-primary-200 bg-white px-3 py-2 text-right text-gray-700 shadow-sm outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-100"
           >
             <option value="">اختر مستوى النشاط</option>
-            <option value="relax">استرخاء</option>
-            <option value="sensible">معتدل</option>
-            <option value="vigour">نشط</option>
+            <option value="low">منخفض</option>
+            <option value="medium">متوسط</option>
+            <option value="high">عالي</option>
           </select>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-primary-700 mb-1">
-            ساعات العمل
-          </label>
-          <input
-            type="text"
-            {...register("opening_hours")}
-            className="w-full rounded-lg border border-primary-200 bg-white px-3 py-2 text-right text-gray-700 shadow-sm outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-100"
-            placeholder="مثال: 9:00 - 17:00 (يمكن إضافة عدة ساعات)"
-          />
-          <p className="text-xs text-gray-500 mt-1">يمكنك إضافة عدة فترات عمل بفصلها بفاصلة</p>
-        </div>
+        <FormField label="ساعات العمل" name="opening_hours" register={register} errors={errors} />
 
         <FormField label="متوسط التقييم" name="average_rating" register={register} errors={errors} type="number" options={{ valueAsNumber: true }} />
         <FormField label="عدد المراجعات" name="reviews_count" register={register} errors={errors} type="number" options={{ valueAsNumber: true }} />
@@ -294,67 +245,13 @@ export default function DestinationForm({ onSubmit, defaultValues, isSubmitting 
         <label className="block text-sm font-medium text-gray-700 mb-1">
           الصور
         </label>
-        
-        {/* Existing Images */}
-        {existingImages.length > 0 && (
-          <div className="mb-4">
-            <p className="text-sm text-gray-600 mb-2">الصور الحالية:</p>
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
-              {existingImages.map((image, index) => (
-                <div key={index} className="relative group">
-                  <img
-                    src={image}
-                    alt={`Existing image ${index + 1}`}
-                    className="w-full h-24 object-cover rounded-lg border"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveExistingImage(index)}
-                    className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <X size={16} />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* New Image Previews */}
-        {newImagePreviews.length > 0 && (
-          <div className="mb-4">
-            <p className="text-sm text-gray-600 mb-2">صور جديدة:</p>
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
-              {newImagePreviews.map((preview, index) => (
-                <div key={index} className="relative group">
-                  <img
-                    src={preview}
-                    alt={`New image ${index + 1}`}
-                    className="w-full h-24 object-cover rounded-lg border"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveNewImage(index)}
-                    className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    <X size={16} />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* File Input */}
         <input
           type="file"
           accept="image/*"
           multiple
           {...register("images")}
-          onChange={handleImageChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
         />
-        <p className="text-xs text-gray-500 mt-1">يمكنك رفع صور متعددة</p>
       </div>
 
       <button

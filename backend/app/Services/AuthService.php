@@ -57,12 +57,7 @@ class AuthService
     {
         $user = User::where('email', $data['email'])->first();
 
-        if ($user && ($user->status ===  \App\Enums\UserStatus::Blocked || $user->status === \App\Enums\UserStatus::Closed) ) {
-            throw ValidationException::withMessages([
-                'email' => ['الحساب ' . $user->status->label()],
-            ]);
-        }
-        
+
         if (!$user || !Hash::check($data['password'], $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['بيانات التوثق غير صحيحة'],

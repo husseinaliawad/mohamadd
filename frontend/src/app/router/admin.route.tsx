@@ -11,6 +11,7 @@ import {
   DestinationsPage,
   CreateDestinationPage
 } from "@/features/admin";
+import GuideNotificationsPage from "@/features/notifications/pages/GuideNotificationsPage";
 
 const adminRoutes  = [
   {
@@ -110,6 +111,14 @@ const adminRoutes  = [
         element: (
           <ProtectedRoute role="admin">
             <CreateDestinationPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "notifications",
+        element: (
+          <ProtectedRoute role="admin">
+            <GuideNotificationsPage />
           </ProtectedRoute>
         ),
       },

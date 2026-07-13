@@ -15,7 +15,8 @@ const statusConfig: Record<SuggestionStatus, { label: string; color: string }> =
   rejected: { label: "مرفوض", color: "bg-red-100 text-red-700" },
 };
 
-const userTypeConfig: Record<"guide" | "tourist", { label: string }> = {
+const userTypeConfig: Record<"admin" | "guide" | "tourist", { label: string }> = {
+  admin: { label: "Admin" },
   guide: { label: "مرشد" },
   tourist: { label: "سائح" },
 };
@@ -51,18 +52,17 @@ export default function SuggestedPlaceTable({ suggestedPlaces, onApprove, onReje
               <tr key={place.id} className="hover:bg-gray-50">
                 <td className="p-3 border">{index + 1}</td>
                 <td className="p-3 border">{place.name}</td>
-                <td className="p-3 border">{place.city_id || "-"}</td>
-                <td className="p-3 border">{place.user_name}</td>
-                {/* <td className="p-3 border">{userTypeConfig[place.user_type].label}</td> */}
-                <td>x</td>
+                <td className="p-3 border">{place.city?.name || place.city_id || "-"}</td>
+                <td className="p-3 border">{place.user_name || place.user?.name || "-"}</td>
+                <td className="p-3 border">{userTypeConfig[place.user_type || place.user?.role || "tourist"].label}</td>
                 <td className="p-3 border">
                   {place.created_at ? new Date(place.created_at).toLocaleDateString('ar-EG') : '-'}
                 </td>
                 <td className="p-3 border">
                   <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${statusConfig[place.status].color}`}
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${(statusConfig[place.status] ?? statusConfig.pending).color}`}
                   >
-                    {statusConfig[place.status].label}
+                    {(statusConfig[place.status] ?? statusConfig.pending).label}
                   </span>
                 </td>
                 <td className="p-3 border">

@@ -1,0 +1,255 @@
+{
+  "info": {
+    "name": "NextTrip AI APIs",
+    "description": "Postman collection for testing Smart Trip Planner, Nearby Places Explore, and the standalone Python AI service.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "backend_url",
+      "value": "http://127.0.0.1:8000/api"
+    },
+    {
+      "key": "ai_url",
+      "value": "http://127.0.0.1:8010"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth - Tourist Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"noor@test.com\",\n  \"password\": \"password\"\n}"
+        },
+        "url": {
+          "raw": "{{backend_url}}/login",
+          "host": [
+            "{{backend_url}}"
+          ],
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Login succeeded', function () {",
+              "  pm.expect(json.success).to.eql(true);",
+              "});",
+              "if (json.data && json.data.token) {",
+              "  pm.collectionVariables.set('token', json.data.token);",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Backend - Smart Trip Planner",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Postman ML Trip\",\n  \"day_count\": 1,\n  \"start_time\": \"09:00\",\n  \"trip_pace\": \"slow\",\n  \"preferred_activity_level\": \"sensible\",\n  \"interest_ids\": [1],\n  \"is_outdoor\": true\n}"
+        },
+        "url": {
+          "raw": "{{backend_url}}/tourist/ai/trips/plan",
+          "host": [
+            "{{backend_url}}"
+          ],
+          "path": [
+            "tourist",
+            "ai",
+            "trips",
+            "plan"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Trip created', function () {",
+              "  pm.expect(json.success).to.eql(true);",
+              "  pm.expect(json.data).to.have.property('days');",
+              "});",
+              "pm.test('ML metrics returned', function () {",
+              "  pm.expect(json.data).to.have.property('ml_metrics');",
+              "  pm.expect(json.data.ml_metrics).to.have.property('accuracy');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Backend - Nearby Places Explore",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"latitude\": 33.5138,\n  \"longitude\": 36.2765,\n  \"radius_km\": 50,\n  \"category_id\": 1,\n  \"interest_ids\": [1],\n  \"limit\": 5\n}"
+        },
+        "url": {
+          "raw": "{{backend_url}}/tourist/ai/nearby-places",
+          "host": [
+            "{{backend_url}}"
+          ],
+          "path": [
+            "tourist",
+            "ai",
+            "nearby-places"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "pm.test('Nearby response succeeded', function () {",
+              "  pm.expect(json.success).to.eql(true);",
+              "  pm.expect(json.data).to.have.property('places');",
+              "});",
+              "pm.test('ML metrics returned', function () {",
+              "  pm.expect(json.data).to.have.property('ml_metrics');",
+              "  pm.expect(json.data.ml_metrics).to.have.property('accuracy');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Backend - Get Saved AI Trips",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{backend_url}}/tourist/ai/trips",
+          "host": [
+            "{{backend_url}}"
+          ],
+          "path": [
+            "tourist",
+            "ai",
+            "trips"
+          ]
+        }
+      }
+    },
+    {
+      "name": "AI Service - Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{ai_url}}/health",
+          "host": [
+            "{{ai_url}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "AI Service - Direct Plan Trip",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"preferences\": {\n    \"title\": \"Direct AI Test\",\n    \"day_count\": 1,\n    \"trip_pace\": \"slow\",\n    \"preferred_activity_level\": \"sensible\",\n    \"interest_ids\": [1],\n    \"budget_max\": 50,\n    \"is_outdoor\": true\n  },\n  \"places\": [\n    {\n      \"id\": 1,\n      \"name\": \"Test Place 1\",\n      \"cost\": 20,\n      \"expected_duration_minutes\": 90,\n      \"activity_level\": \"sensible\",\n      \"is_outdoor\": true,\n      \"average_rating\": 4.6,\n      \"reviews_count\": 25,\n      \"latitude\": 33.51,\n      \"longitude\": 36.27,\n      \"interest_ids\": [1, 2]\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Test Place 2\",\n      \"cost\": 80,\n      \"expected_duration_minutes\": 120,\n      \"activity_level\": \"vigour\",\n      \"is_outdoor\": false,\n      \"average_rating\": 3.8,\n      \"reviews_count\": 9,\n      \"latitude\": 33.53,\n      \"longitude\": 36.29,\n      \"interest_ids\": [3]\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{ai_url}}/plan-trip",
+          "host": [
+            "{{ai_url}}"
+          ],
+          "path": [
+            "plan-trip"
+          ]
+        }
+      }
+    },
+    {
+      "name": "AI Service - Direct Nearby Places",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"preferences\": {\n    \"latitude\": 33.5138,\n    \"longitude\": 36.2765,\n    \"radius_km\": 20,\n    \"interest_ids\": [1],\n    \"budget\": 50,\n    \"limit\": 5\n  },\n  \"places\": [\n    {\n      \"id\": 1,\n      \"name\": \"Nearby Test 1\",\n      \"cost\": 20,\n      \"expected_duration_minutes\": 90,\n      \"activity_level\": \"sensible\",\n      \"is_outdoor\": true,\n      \"average_rating\": 4.6,\n      \"reviews_count\": 25,\n      \"latitude\": 33.51,\n      \"longitude\": 36.27,\n      \"interest_ids\": [1, 2]\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Nearby Test 2\",\n      \"cost\": 80,\n      \"expected_duration_minutes\": 120,\n      \"activity_level\": \"vigour\",\n      \"is_outdoor\": false,\n      \"average_rating\": 3.8,\n      \"reviews_count\": 9,\n      \"latitude\": 33.9,\n      \"longitude\": 36.8,\n      \"interest_ids\": [3]\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{ai_url}}/nearby-places",
+          "host": [
+            "{{ai_url}}"
+          ],
+          "path": [
+            "nearby-places"
+          ]
+        }
+      }
+    }
+  ]
+}

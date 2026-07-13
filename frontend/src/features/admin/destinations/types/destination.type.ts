@@ -1,5 +1,3 @@
-export type ActivityLevel = "relax" | "sensible" | "vigour";
-
 export interface Destination {
   id: number;
   city_id: number;
@@ -10,11 +8,11 @@ export interface Destination {
   address?: string;
   cost?: number;
   expected_duration_minutes?: number;
-  activity_level?: ActivityLevel;
+  activity_level?: string;
   is_outdoor?: boolean;
   best_seasons?: string[];
   recommended_times?: string[];
-  opening_hours?: string[];
+  opening_hours?: string;
   average_rating?: number;
   reviews_count?: number;
   latitude?: number;
@@ -34,17 +32,15 @@ export interface DestinationFormData {
   address?: string;
   cost?: number;
   expected_duration_minutes?: number;
-  activity_level?: ActivityLevel;
+  activity_level?: string;
   is_outdoor?: boolean;
   best_seasons?: string[];
   recommended_times?: string[];
-  opening_hours?: string; // String for form input (comma-separated), will be converted to array in API
+  opening_hours?: string;
   average_rating?: number;
   reviews_count?: number;
   latitude?: number;
   longitude?: number;
   images?: File[];
-  existing_images?: string[]; // Existing images from database
-  images_to_delete?: number[]; // IDs of images to delete
   interests?: number[];
 }

@@ -39,7 +39,7 @@ export default function DestinationsPage() {
         <h1 className="text-2xl font-bold text-gray-900">إدارة الأماكن</h1>
         <button
           onClick={() => setIsFormVisible(true)}
-          className="bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+          className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
         >
           إضافة مكان جديد
         </button>
@@ -58,8 +58,6 @@ export default function DestinationsPage() {
           defaultValues={editingDestination ? {
             ...editingDestination,
             images: undefined,
-            existing_images: editingDestination.images || [],
-            opening_hours: editingDestination.opening_hours?.join(', ') || undefined,
           } : undefined}
           isSubmitting={false}
         />

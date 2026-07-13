@@ -39,19 +39,15 @@ class PlaceController extends Controller
             'longitude' => 'nullable|numeric',
             'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
-            'interests' => 'nullable|array',
-            'interests.*' => 'exists:interests,id',
         ]);
 
         $place = Place::create($data);
 
         if ($request->hasFile('images')) {
-            $order = 1;
             foreach ($request->file('images') as $image) {
                 $path = $image->store('places', 'public');
                 $place->images()->create([
                     'image_url' => basename($path),
-                    'order' => $order++,
                 ]);
             }
         }
@@ -72,19 +68,15 @@ class PlaceController extends Controller
             'description' => 'nullable|string',
             'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
-            'interests' => 'nullable|array',
-            'interests.*' => 'exists:interests,id',
         ]);
 
         $place->update($data);
 
         if ($request->hasFile('images')) {
-            $order = 1;
             foreach ($request->file('images') as $image) {
                 $path = $image->store('places', 'public');
                 $place->images()->create([
                     'image_url' => basename($path),
-                    'order' => $order++,
                 ]);
             }
         }

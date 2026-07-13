@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
     'start_time',
 
     'duration_minutes',
-    'travel_time_minutes',
+    'travel_minutes',
 
     'estimated_cost',
     'note',

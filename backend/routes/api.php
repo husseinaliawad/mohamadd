@@ -11,6 +11,7 @@ use App\Http\Controllers\Guide\ReviewController;
 
 use App\Http\Controllers\Tourist\GuideBookingController as TouristGuideBookingController;
 use App\Http\Controllers\Tourist\ReviewController as TouristReviewController;
+use App\Http\Controllers\Tourist\AiTripController;
 
 
 use App\Http\Controllers\NotificationController;
@@ -33,6 +34,8 @@ Route::controller(AuthController::class)->group(function () {
 Route::prefix('public')->group(function () {
     Route::get('/cities', [LookupController::class, 'cities']);
     Route::get('/languages', [LookupController::class, 'languages']);
+    Route::get('/categories', [LookupController::class, 'categories']);
+    Route::get('/interests', [LookupController::class, 'interests']);
 
     Route::get('/guides', [GuideController::class, 'index']);
     Route::get('/guides/{guide}', [GuideController::class, 'show']);
@@ -85,6 +88,11 @@ Route::middleware(['auth:sanctum', 'role:tourist'])
         Route::post('/guide-bookings/{booking}/review', [TouristGuideBookingController::class, 'review']);
 
         Route::get('/reviews', [TouristReviewController::class, 'index']);
+
+        Route::get('/ai/trips', [AiTripController::class, 'trips']);
+        Route::post('/ai/trips/plan', [AiTripController::class, 'plan']);
+        Route::get('/ai/trips/{trip}', [AiTripController::class, 'show']);
+        Route::post('/ai/nearby-places', [AiTripController::class, 'nearby']);
     });
 
 //الاشعارات

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\City;
+use App\Models\Interest;
 use App\Models\Language;
 use Illuminate\Http\Request;
 
@@ -22,5 +24,15 @@ class LookupController extends Controller
     {
         $languages = Language::all();
         return api_success($languages, "كافة اللغات");
+    }
+
+    public function categories()
+    {
+        return api_success(Category::all(), "كافة التصنيفات");
+    }
+
+    public function interests()
+    {
+        return api_success(Interest::all(), "كافة الاهتمامات");
     }
 }

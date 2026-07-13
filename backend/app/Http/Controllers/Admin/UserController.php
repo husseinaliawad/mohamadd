@@ -42,8 +42,13 @@ class UserController extends Controller
             });
         }
 
-        return api_success($query->latest()->get());
-    }    
+        return api_success($query->latest()->paginate($request->get('per_page', 15)));
+    }
+
+    public function show(User $user)
+    {
+        return api_success($user->load(['guide']));
+    }
 
     public function changeStatus(Request $request, User $user)
     {
