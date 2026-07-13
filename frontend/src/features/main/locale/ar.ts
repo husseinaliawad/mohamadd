@@ -1,0 +1,1 @@
+export const welcomeMessage = "خطّط رحلتك الذكية في سوريا بسهولة";

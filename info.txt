@@ -1,0 +1,68 @@
+تم تحميل المشروعين هنا:
+
+- الباك: [backend](C:/Users/User/Desktop/mohamad/backend)
+- الفرونت: [frontend](C:/Users/User/Desktop/mohamad/frontend)
+
+**الفكرة العامة**
+المشروع هو منصة سياحية باسم **NextTrip Syria** لتنظيم تجربة السفر داخل سوريا. يوجد 3 أنواع مستخدمين: `tourist` سائح، `guide` مرشد، `admin` مدير. السائح يستطيع استعراض المرشدين، فلترتهم، حجز مرشد، إلغاء الحجز، تقييم الحجز، ومتابعة إشعاراته. المرشد يستطيع إدارة ملفه الشخصي، قبول/رفض/إلغاء الحجوزات، مشاهدة تقييماته ولوحة تحكمه. المدير يدير المدن، التصنيفات، الأماكن، الاهتمامات، اللغات، المستخدمين، واقتراحات الأماكن.
+
+**الباك**
+الباك مبني بـ Laravel API ويستخدم Sanctum للتوكنات. أهم الطبقات:
+
+- `routes/api.php`: يعرّف كل الـ endpoints.
+- `AuthController/AuthService`: تسجيل، دخول، خروج، `me`.
+- `GuideBookingController`: حجوزات السائح مع المرشد.
+- `Guide/BookingController`: قرارات المرشد على الحجوزات.
+- `Guide/ProfileController`: ملف المرشد.
+- `Public/GuideController`: قائمة وتفاصيل المرشدين العامة.
+- `Admin/*Controller`: CRUD للمدن، التصنيفات، الأماكن، اللغات، الاهتمامات، المستخدمين.
+- `NotificationController`: إشعارات داخلية database notifications.
+- `SuggestedPlaceController`: اقتراح أماكن جديدة ومراجعتها من الأدمن.
+
+قاعدة البيانات تشمل جداول: users, guides, cities, categories, places, place_images, interests, languages, guide_bookings, booking_reviews, booking logs, suggested_places, trips, trip_places، إضافة إلى جداول AI/Explore لكنها غير موصولة حاليا بمسارات API واضحة.
+
+**الـ API Contract**
+العقد الأساسي موجود في الباك: `NextTrip API.postman_collection.json`. أهم endpoints الفعلية:
+
+- Auth: `POST /register`, `POST /login`, `POST /logout`, `GET /me`
+- Public: `GET /public/cities`, `GET /public/languages`, `GET /public/guides`, `GET /public/guides/{id}`
+- Admin: `/admin/cities`, `/admin/categories`, `/admin/places`, `/admin/interests`, `/admin/languages`, `/admin/users`, `/admin/suggested-places`
+- Guide: `GET/POST /guide/profile`, `GET /guide/bookings`, `POST /guide/bookings/{id}/accept|reject|cancel`, `GET /guide/reviews`, `GET /guide/dashboard`
+- Tourist: `GET /tourist/guide-bookings`, `POST /tourist/guide-bookings/{guide}/book`, `POST /tourist/guide-bookings/{booking}/cancel`, `POST /tourist/guide-bookings/{booking}/review`, `GET /tourist/reviews`
+- Notifications: `GET /notifications`, `GET /notifications/unread`, `GET /notifications/unread-count`, `POST /notifications/mark-all-as-read`
+
+**الفرونت**
+الفرونت مبني بـ React + TypeScript + Vite، ويستخدم:
+
+- `axios` في `src/lib/axios.ts`
+- Zustand لحفظ المستخدم والتوكن
+- React Query للطلبات
+- React Router للمسارات
+- React Hook Form + Zod للفورمات
+- Tailwind CSS للستايل
+
+تقسيم الفرونت واضح حسب features:
+
+- `auth`: تسجيل ودخول
+- `tourist`: الصفحة، المرشدون، الحجوزات، التقييمات
+- `guide`: لوحة المرشد، الحجوزات، الملف الشخصي، التقييمات
+- `admin`: المدن، التصنيفات، الاهتمامات، اللغات، المستخدمون، الأماكن، الاقتراحات
+- `notifications`: إشعارات مشتركة
+- `lookups`: المدن واللغات العامة
+
+**تدفق الحجز**
+السائح يفتح قائمة المرشدين من `/public/guides`، يفلتر حسب المدن/اللغات/السعر/الحالة، ثم يحجز عبر `/tourist/guide-bookings/{guide}/book`. الباك يحسب السعر: `day_count * guide.daily_price` ويتأكد أن المرشد متاح وغير محجوز في نفس الفترة. بعدها يصل إشعار للمرشد. المرشد يقبل أو يرفض. تغييرات الحالة تسجل في `guide_booking_logs` وترسل إشعارا للسائح. بعد اكتمال الحجز يستطيع السائح إضافة تقييم.
+
+**ملاحظات مهمة**
+وجدت عدة عدم تطابق يجب إصلاحها قبل التشغيل الجدي:
+
+- مستودع الباك يحتوي `composer.lock` لكن لا يحتوي `composer.json`، وهذا يمنع تثبيت الاعتماديات بشكل طبيعي من نسخة نظيفة.
+- الفرونت يستدعي أماكن الأدمن باسم `/admin/destinations` بينما الباك يعرّفها `/admin/places`.
+- الفرونت لديه `markAsRead` على `/notifications/{id}/mark-as-read` لكن الباك لا يعرّف هذا المسار.
+- ملف Postman في الفرونت قديم/غير مطابق، فيه مسارات مثل `/guide/auth/login` و`/tourist/bookings` بينما الكود والباك يستخدمان `/login`, `/register`, `/tourist/guide-bookings`.
+- في الفرونت بعض مسارات guide ليست محمية بـ `ProtectedRoute` إلا الصفحة الرئيسية تحت `/guide`.
+- يوجد تكرار لمسار `/tourist` في `tourist.route.tsx`.
+- منطق الإلغاء غير متسق: resource يعرض `can_tourist_cancel` إذا بقي 14 يوم، بينما controller يمنع فقط إذا أقل من 7 أيام.
+- توجد خدمات TripPlanner/AI و migrations للرحلات والـ AI، لكنها غير مكشوفة حاليا عبر routes API.
+
+الخلاصة: المشروع عبارة عن MVP جيد لمنصة سياحة وحجز مرشدين في سوريا، والباك يحتوي معظم منطق الدومين الحقيقي. أكبر عمل مطلوب حاليا هو توحيد الـ API contract بين الفرونت والباك، إصلاح نقص `composer.json`، وتنظيف المسارات القديمة/غير المستخدمة في الفرونت.

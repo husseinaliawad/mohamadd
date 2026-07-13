@@ -1,0 +1,2458 @@
+{
+  "info": {
+    "_postman_id": "b8dcb9da-7f65-439c-89bd-a9bcacf9d6d2",
+    "name": "NextTrip API",
+    "description": "API collection for NextTrip application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24631824"
+  },
+  "item": [
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "Admin Login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"password\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Cities",
+          "item": [
+            {
+              "name": "Get All Cities",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/cities",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "cities"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create City",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "دير الزور",
+                      "type": "text",
+                      "uuid": "0039cb22-51a1-48b7-916d-8a82c00a5e50"
+                    },
+                    {
+                      "key": "description",
+                      "value": "مدينة عريقة",
+                      "type": "text",
+                      "uuid": "dcca0d4f-f998-48f5-a7b8-fb784b07b2b4"
+                    },
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "uuid": "6fc83cf0-c92c-4a1e-addb-36a243bc433b",
+                      "src": "دير الزور.jpg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/cities",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "cities"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update City",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "_method",
+                      "value": "put",
+                      "type": "text",
+                      "uuid": "1247c2fd-5e29-435d-adad-682d60e2afc7"
+                    },
+                    {
+                      "key": "name",
+                      "value": "دمشق",
+                      "type": "text",
+                      "uuid": "0039cb22-51a1-48b7-916d-8a82c00a5e50"
+                    },
+                    {
+                      "key": "description",
+                      "value": "مدينة عريقة",
+                      "type": "text",
+                      "uuid": "dcca0d4f-f998-48f5-a7b8-fb784b07b2b4"
+                    },
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "uuid": "6fc83cf0-c92c-4a1e-addb-36a243bc433b",
+                      "src": "105.jpg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/cities/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "cities",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete City",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/cities/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "cities",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Categories",
+          "item": [
+            {
+              "name": "Get All Categories",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/categories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "categories"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Category",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"مواقع تاريخية\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/categories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "categories"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Category",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"مواقع أثرية عظيمة\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/categories/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "categories",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Category",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/categories/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "categories",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Places",
+          "item": [
+            {
+              "name": "Get All Places",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/places",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "places"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Place Details",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/places/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "places",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Place",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "city_id",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "4f6d594e-a000-4505-b1a5-fcece58ef69e"
+                    },
+                    {
+                      "key": "category_id",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "0b80c930-19b6-4f37-b305-b2b27c0f698f"
+                    },
+                    {
+                      "key": "name",
+                      "value": "محمية الغابات",
+                      "type": "text",
+                      "uuid": "dc641f2c-f2db-4bb8-9ca6-c47e3e63ffcd"
+                    },
+                    {
+                      "key": "description",
+                      "value": "مكان سياحي جميل مع مناظر طبيعية",
+                      "type": "text",
+                      "uuid": "1b5e8d81-69ef-4d0d-a04f-b42fe4d18f0c"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "0999999999",
+                      "type": "text",
+                      "uuid": "2f5727d0-47aa-41f5-a8af-44461e38c315"
+                    },
+                    {
+                      "key": "address",
+                      "value": "دمشق - وسط المدينة",
+                      "type": "text",
+                      "uuid": "8902f5ef-3bd0-4f60-8b18-7fcedb08ed85"
+                    },
+                    {
+                      "key": "cost",
+                      "value": "50",
+                      "type": "text",
+                      "uuid": "4f53dcfe-e3f4-4112-968d-d71df9516200"
+                    },
+                    {
+                      "key": "expected_duration_minutes",
+                      "value": "120",
+                      "type": "text",
+                      "uuid": "bf6272ff-57bc-4d51-9a3d-3d37c8d4a930"
+                    },
+                    {
+                      "key": "activity_level",
+                      "value": "vigour",
+                      "type": "text",
+                      "uuid": "7d3d7f7d-c7f5-4f29-9e33-c7f1b7fded2d"
+                    },
+                    {
+                      "key": "is_outdoor",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "d4093dfd-1f24-4e5b-84f3-cf6d995e8808"
+                    },
+                    {
+                      "key": "images[]",
+                      "type": "file",
+                      "uuid": "ab041224-f5f3-4bee-8f48-43b78a24680f",
+                      "src": []
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/places",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "places"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Place",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "محمية الغابات المحدثة",
+                      "type": "text",
+                      "uuid": "f297fb7b-6611-4e1f-b1cb-90cfc0f406e4"
+                    },
+                    {
+                      "key": "description",
+                      "value": "تحديث وصف المكان",
+                      "type": "text",
+                      "uuid": "614557f8-6f8b-40d5-8df4-8904d0c3d2f7"
+                    },
+                    {
+                      "key": "images[]",
+                      "type": "file",
+                      "uuid": "2bf1ddc7-6d9f-4d92-a0d5-bf15ce2bea9d",
+                      "src": []
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/places/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "places",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Place",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/places/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "places",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Interests",
+          "item": [
+            {
+              "name": "Get All Interests",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/interests",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "interests"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Interest",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"ثقافة\",\n  \"question\": \"هل يهمك الفعاليات الثقافية?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/interests",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "interests"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Interest",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"فعاليات ثقافية\",\n  \"question\": \"هل يهمك الفعاليات الثقافية?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/interests/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "interests",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Interest",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/interests/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "interests",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Languages",
+          "item": [
+            {
+              "name": "Get All Languages",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/languages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "languages"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Language",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"English\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/languages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "languages"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Language",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"فرنسي\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/languages/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "languages",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "3"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Language",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/languages/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "languages",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "Get All Users",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/users?role=guide&status=active&search=",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "guide"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "search",
+                      "value": "",
+                      "description": "Search by name or email"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update User Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/users/:id/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users",
+                    ":id",
+                    "status"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "make User admin",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/users/:id/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "users",
+                    ":id",
+                    "status"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Suggested Places",
+          "item": [
+            {
+              "name": "Get All Suggested Places",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/admin/suggested-places",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "suggested-places"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Suggestion Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"approved\",\n  \"admin_notes\": \"شكرا لك مكان رائع\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/admin/suggested-places/1/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "admin",
+                    "suggested-places",
+                    "1",
+                    "status"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "1|mucLxpQfoJOsGmOFUCLxi1AEMAQKvv3EPCSQuJco305a0183",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "guide",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "register",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "role",
+                      "value": "guide",
+                      "type": "text",
+                      "uuid": "535bfa3a-42ab-4449-8dbe-0f4ad423eb26"
+                    },
+                    {
+                      "key": "name",
+                      "value": "فرحان",
+                      "type": "text",
+                      "uuid": "3345c10f-9b4a-4af1-a7df-ff552525b45e"
+                    },
+                    {
+                      "key": "email",
+                      "value": "farhan@example.com",
+                      "type": "text",
+                      "uuid": "757ed994-d5f5-436f-91ee-ac788820a6f0"
+                    },
+                    {
+                      "key": "password",
+                      "value": "12345678",
+                      "type": "text",
+                      "uuid": "ae33eeff-5750-4ee2-b639-1dc9b235b4b1"
+                    },
+                    {
+                      "key": "password_confirmation",
+                      "value": "12345678",
+                      "type": "text",
+                      "uuid": "6deb2fd1-8aee-4734-b3ed-e28f9b1c08e7"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "M",
+                      "type": "text",
+                      "uuid": "abc98353-d22a-4ee0-bf6c-03c1c605bddc"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "+963987654321",
+                      "type": "text",
+                      "uuid": "77feb28a-bfff-4fb0-bb74-dbcd92b51f35"
+                    },
+                    {
+                      "key": "DOB",
+                      "value": "1990-05-12",
+                      "type": "text",
+                      "uuid": "90a2180f-961e-4ed4-bf45-271ea49a7a23"
+                    },
+                    {
+                      "key": "daily_price",
+                      "value": "150",
+                      "type": "text",
+                      "uuid": "f89dee90-bf11-4b76-9223-9c8c0ea318be"
+                    },
+                    {
+                      "key": "bio",
+                      "value": "I am a professional tour guide with 7 years of experience in Syrian tourism.\t",
+                      "type": "text",
+                      "uuid": "e849646e-353a-4334-9da6-08a13f0489b1"
+                    },
+                    {
+                      "key": "avatar",
+                      "type": "file",
+                      "uuid": "a70a450f-c01b-4ddb-8852-bc9f4e8ae446",
+                      "src": "avatar-placeHolder.png"
+                    },
+                    {
+                      "key": "languages[]",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "163c5b44-9fc9-4300-989d-b8cef5639e83"
+                    },
+                    {
+                      "key": "languages[]",
+                      "value": "2",
+                      "type": "text",
+                      "uuid": "deb2f1f6-2ea6-48af-afd0-ff62f211f8ea"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{url}}\\register",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"baraa@test.com\",\r\n    \"password\" : \"password\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}\\login",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "logout",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/logout",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "logout"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "me",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}\\me",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "bookings",
+          "item": [
+            {
+              "name": "cancel",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"note\": \"مضطر للاعتذار عن الحجز بسبب حادث\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}\\guide/bookings/3/cancel",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "guide",
+                    "bookings",
+                    "3",
+                    "cancel"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "reject",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"note\" : \"اعتذر منك لدي شؤون عائلية في هذه الفترة \"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}\\guide/bookings/5/reject",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "guide",
+                    "bookings",
+                    "5",
+                    "reject"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "accept",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"note\" : \"أنا جاهز إن شاء الله\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}\\guide/bookings/4/accept",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "guide",
+                    "bookings",
+                    "4",
+                    "accept"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "bookings",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "ISBN",
+                      "value": "1111222333441",
+                      "type": "text",
+                      "uuid": "4c5c0f5d-33df-4006-81f9-01e527b8678e"
+                    },
+                    {
+                      "key": "title",
+                      "value": "تيسير الأمور القدور",
+                      "type": "text",
+                      "uuid": "26f46468-67fb-468c-ab33-4fc86ada4250"
+                    },
+                    {
+                      "key": "category_id",
+                      "value": "3",
+                      "type": "text",
+                      "uuid": "9c4ddebf-4722-4770-8f1f-845e64ddfba2"
+                    },
+                    {
+                      "key": "pages",
+                      "value": "100",
+                      "type": "text",
+                      "uuid": "627edd3f-9dcd-4d14-b9c3-9a7f7adf3e7e"
+                    },
+                    {
+                      "key": "cover",
+                      "type": "file",
+                      "uuid": "61152c47-c3c1-4d42-b9c6-80abbcaaede7",
+                      "src": "/C:/Users/Admin/Pictures/كتاب.gif"
+                    },
+                    {
+                      "key": "authors[]",
+                      "value": "8",
+                      "type": "text",
+                      "uuid": "4d168d9d-cd65-4c0f-9d1e-081ee9b8d195"
+                    },
+                    {
+                      "key": "authors[]",
+                      "value": "2",
+                      "type": "text",
+                      "uuid": "4d168d9d-cd65-4c0f-9d1e-081ee9b8d195"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{url}}/guide/bookings",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "guide",
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "profile",
+          "item": [
+            {
+              "name": "تعديل الملف الشخصي",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Ahmad Saleh",
+                      "type": "text",
+                      "uuid": "3345c10f-9b4a-4af1-a7df-ff552525b45e"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active",
+                      "type": "text",
+                      "uuid": "fe0a516b-e266-4515-a77f-a5887f8f3450"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "M",
+                      "type": "text",
+                      "uuid": "abc98353-d22a-4ee0-bf6c-03c1c605bddc"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "+963987654321",
+                      "type": "text",
+                      "uuid": "77feb28a-bfff-4fb0-bb74-dbcd92b51f35"
+                    },
+                    {
+                      "key": "DOB",
+                      "value": "1990-05-12",
+                      "type": "text",
+                      "uuid": "90a2180f-961e-4ed4-bf45-271ea49a7a23"
+                    },
+                    {
+                      "key": "daily_price",
+                      "value": "150",
+                      "type": "text",
+                      "uuid": "f89dee90-bf11-4b76-9223-9c8c0ea318be"
+                    },
+                    {
+                      "key": "bio",
+                      "value": "I am a professional tour guide with 20 years of experience in Syrian tourism.",
+                      "type": "text",
+                      "uuid": "e849646e-353a-4334-9da6-08a13f0489b1"
+                    },
+                    {
+                      "key": "avatar",
+                      "type": "file",
+                      "uuid": "a70a450f-c01b-4ddb-8852-bc9f4e8ae446",
+                      "src": "avatar-placeHolder.png"
+                    },
+                    {
+                      "key": "languages[]",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "fc89dce7-843f-40db-b960-0fdc4e848d26"
+                    },
+                    {
+                      "key": "cities[]",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "118cc2da-b0cc-4008-8a11-8226451096db"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{url}}\\guide/profile",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "guide",
+                    "profile"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "عرض الملف الشخصي",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}\\guide/profile",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "guide",
+                    "profile"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "reviews",
+          "item": [
+            {
+              "name": "التقييمات",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Ahmad Saleh",
+                      "type": "text",
+                      "uuid": "3345c10f-9b4a-4af1-a7df-ff552525b45e"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active",
+                      "type": "text",
+                      "uuid": "fe0a516b-e266-4515-a77f-a5887f8f3450"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "M",
+                      "type": "text",
+                      "uuid": "abc98353-d22a-4ee0-bf6c-03c1c605bddc"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "+963987654321",
+                      "type": "text",
+                      "uuid": "77feb28a-bfff-4fb0-bb74-dbcd92b51f35"
+                    },
+                    {
+                      "key": "DOB",
+                      "value": "1990-05-12",
+                      "type": "text",
+                      "uuid": "90a2180f-961e-4ed4-bf45-271ea49a7a23"
+                    },
+                    {
+                      "key": "daily_price",
+                      "value": "150",
+                      "type": "text",
+                      "uuid": "f89dee90-bf11-4b76-9223-9c8c0ea318be"
+                    },
+                    {
+                      "key": "bio",
+                      "value": "I am a professional tour guide with 20 years of experience in Syrian tourism.",
+                      "type": "text",
+                      "uuid": "e849646e-353a-4334-9da6-08a13f0489b1"
+                    },
+                    {
+                      "key": "avatar",
+                      "type": "file",
+                      "uuid": "a70a450f-c01b-4ddb-8852-bc9f4e8ae446",
+                      "src": "/C:/Users/Admin/Desktop/images.jpg"
+                    },
+                    {
+                      "key": "languages[]",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "fc89dce7-843f-40db-b960-0fdc4e848d26"
+                    },
+                    {
+                      "key": "cities[]",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "118cc2da-b0cc-4008-8a11-8226451096db"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{url}}\\guide/reviews",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "guide",
+                    "reviews"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "dashboard",
+          "item": [
+            {
+              "name": "البيانات الأساسية - لوحة تحكم المرشد",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}\\guide/dashboard",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "guide",
+                    "dashboard"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "notifications",
+          "item": [
+            {
+              "name": "كل الإشعارات",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}\\notifications",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "الإشعارات الجديدة",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}\\notifications/unread",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "notifications",
+                    "unread"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "عدد الإشعارات الجديدة",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}\\notifications/unread-count",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "notifications",
+                    "unread-count"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "تحويل الاشعارات إلى مقروءة",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}\\notifications/mark-all-as-read",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "notifications",
+                    "mark-all-as-read"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "2|rjWRL30rEeWmzArs6530htne1PoM6V6vekM0a2010f460d65",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tourist",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "register",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\" : \"baraa\",\r\n    \"email\" : \"baraa@example.com\",\r\n    \"password\": \"password\" ,   \r\n    \"password_confirmation\": \"password\" ,\r\n    \"role\": \"tourist\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}\\register",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}\\login",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "logout",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/logout",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "logout"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "guide-bookings",
+          "item": [
+            {
+              "name": "حجز مرشد",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n  \"start_date\": \"2028-11-9\",\r\n  \"day_count\": 3,\r\n  \"description\": \"رحلة لاستكشاف دمشق القديمة\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}\\tourist\\guide-bookings/1/book",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "tourist",
+                    "guide-bookings",
+                    "1",
+                    "book"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "إضافة تقييم",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{  \r\n  \"rating\": 5,\r\n  \"comment\": \"رحلة رائعة، المرشد كان محترفاً جداً!\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}\\tourist\\guide-bookings/2/review",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "tourist",
+                    "guide-bookings",
+                    "2",
+                    "review"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "إلغاء حجز",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"note\" : \"لا استطيع القدوم بسبب حدث طارئ\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}\\tourist/guide-bookings/6/cancel",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "tourist",
+                    "guide-bookings",
+                    "6",
+                    "cancel"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "حجوزاتي",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}\\tourist\\guide-bookings",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "tourist",
+                    "guide-bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "تفاصيل حجز",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}\\tourist\\guide-bookings\\1",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "tourist",
+                    "guide-bookings",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "reviews",
+          "item": [
+            {
+              "name": "تقييماتي",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}\\tourist/reviews",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "tourist",
+                    "reviews"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "notifications",
+          "item": [
+            {
+              "name": "كل الإشعارات",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}\\notifications",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "notifications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "الإشعارات الجديدة",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}\\notifications/unread",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "notifications",
+                    "unread"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "عدد الإشعارات الجديدة",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}\\notifications/unread-count",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "notifications",
+                    "unread-count"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "تحويل الاشعارات إلى مقروءة",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\" :\"noor@test.com\",\r\n    \"password\" : \"password\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}\\notifications/mark-all-as-read",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "notifications",
+                    "mark-all-as-read"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "2|B9iUZHcB84tXT6XQSgPVyCDd0FKIJnMhgw8Z5DZL5b85d912",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "public",
+      "item": [
+        {
+          "name": "guides",
+          "item": [
+            {
+              "name": "تفاصيل مرشد",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}\\public/guides/2",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "public",
+                    "guides",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "قائمة المرشدين",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "Application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/public/guides",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "public",
+                    "guides"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "cities-all",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "Application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}\\public\\cities",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "public",
+                "cities"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "languages-all",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "Application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}\\public\\languages",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "public",
+                "languages"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string",
+      "description": "Authentication token"
+    }
+  ]
+}
